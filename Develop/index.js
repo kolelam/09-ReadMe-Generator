@@ -81,7 +81,17 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile (data)
+{
+    const genFile = "./outPut/ReadMeGen.md"
+    fs.writeFileSync(genFile,generateMarkdown(data),{encoding:'utf8',flag:'w'}, function(err){
+                   err ? console.log(err) : console.log("GREAT! " + genFile + " created.")
+             })
+     fs.writeFile(
+         genFile, generateMarkdown(data),{}, function(err){
+             err ? console.log(err) : console.log("GREAT! " + genFile + " created.")
+         });
+}
 
 // TODO: Create a function to initialize app
 function init() {}
