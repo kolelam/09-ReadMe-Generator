@@ -2,6 +2,7 @@
 // calls inquirer package to begin prompts
 const inquirer = require('inquirer');
 const fs = require('fs');
+const licenses = ["N/A"];
 
 // will prevent user from leaving input blank
 function validateInput(input){
