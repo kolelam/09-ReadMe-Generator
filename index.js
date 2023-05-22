@@ -3,7 +3,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const licenses = ["Apache 2.0", "BSD 3-Clause", "GPL 3.0", "ISC", "MIT", "N/A"];
-const generateMarkdown = require ('./generateMarkdown');
+const generateMarkdown = require('./generateMarkdown');
+const path = require('path');
 // will prevent user from leaving input blank
 function validateInput(input){
     if (input != "") {
@@ -82,17 +83,32 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile (data)
-{
-    const genFile = "./output/generateMarkdown.md"
-    fs.writeFileSync(genFile,generateMarkdown(data),{encoding:'utf8',flag:'w'}, function(err){
-                   err ? console.log(err) : console.log("GREAT! " + genFile + " created.")
-             })
+function writeToFile(data) {
+    const outputDir = path.join(__dirname, 'output');
+    const genFile = path.join(outputDir, 'generateMarkdown.md');
+  
+    console.log('Data:', data); // Check the value of the data variable
+  
+    try {
+      if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir);
+      }
+  
+      const markdownContent = generateMarkdown(data);
+      console.log('Generated Markdown Content:', markdownContent); // Check the generated markdown content
+  
+      fs.writeFileSync(genFile, markdownContent, { encoding: 'utf8', flag: 'w' });
+      console.log("SUCCESS! " + genFile + " created.");
+    } catch (err) {
+      console.error(err);
+    }
+  }
     //  fs.writeFile(
     //      genFile, generateMarkdown(data),{}, function(err){
     //          err ? console.log(err) : console.log("GREAT! " + genFile + " created.")
     //      });
-}
+    //  }
+
 
 // TODO: Create a function to initialize app
 function init() {

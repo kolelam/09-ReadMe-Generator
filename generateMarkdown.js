@@ -76,11 +76,55 @@ function renderLicenseSection(license) {
 }
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) 
-  for (const key in data){
-      if (!data[key]){
-          data[key] = 'N/A';
-      }
+function generateMarkdown(data) {
+  for (const key in data) {
+    if (!data[key]) {
+      data[key] = 'N/A';
+    }
   }
+
+  let tabOC = `
+* [Installation](#installation)
+* [Usage](#usage)
+* [Credits](#credits)
+`;
+
+  if (data.licenses !== "N/A") {
+    tabOC += `* [License](#license)`;
+  }
+
+  tabOC += `
+* [Tests](#tests)
+* [Questions](#questions)`;
+
+  // now to build the whole template literal 
+  return `
+# ${data.title} ${renderLicenseBadge(data.licenses)}
+
+## Description 
+${data.description}
+
+## Table of Contents
+${tabOC}
+
+## Installation 
+${data.installation}
+
+## Usage 
+${data.usage}
+
+## Credits 
+${data.credit}
+
+${renderLicenseSection(data.licenses)}
+
+## Tests 
+${data.test}
+
+## Questions 
+Find me at my GitHub: [${data.github}](https://github.com/${data.github}). 
+If you have any further questions, you can reach out here: ${data.email}.
+`;
+}
 
 module.exports = generateMarkdown;
