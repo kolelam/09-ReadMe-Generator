@@ -3,7 +3,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const licenses = ["N/A"];
-
+const generateMarkdown = require ('./generateMarkdown');
 // will prevent user from leaving input blank
 function validateInput(input){
     if (input != "") {
@@ -84,14 +84,14 @@ const questions = [
 // TODO: Create a function to write README file
 function writeToFile (data)
 {
-    const genFile = "./outPut/ReadMeGen.md"
+    const genFile = "./output/generateMarkdown.md"
     fs.writeFileSync(genFile,generateMarkdown(data),{encoding:'utf8',flag:'w'}, function(err){
                    err ? console.log(err) : console.log("GREAT! " + genFile + " created.")
              })
-     fs.writeFile(
-         genFile, generateMarkdown(data),{}, function(err){
-             err ? console.log(err) : console.log("GREAT! " + genFile + " created.")
-         });
+    //  fs.writeFile(
+    //      genFile, generateMarkdown(data),{}, function(err){
+    //          err ? console.log(err) : console.log("GREAT! " + genFile + " created.")
+    //      });
 }
 
 // TODO: Create a function to initialize app
