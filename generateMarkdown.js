@@ -76,7 +76,7 @@ function renderLicenseSection(license) {
 }
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
+function generateMarkdown(data) 
   for (const key in data){
       if (!data[key]){
           data[key] = 'N/A';

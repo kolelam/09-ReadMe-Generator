@@ -2,7 +2,7 @@
 // calls inquirer package to begin prompts
 const inquirer = require('inquirer');
 const fs = require('fs');
-const licenses = ["N/A"];
+const licenses = ["Apache 2.0", "BSD 3-Clause", "GPL 3.0", "ISC", "MIT", "N/A"];
 const generateMarkdown = require ('./generateMarkdown');
 // will prevent user from leaving input blank
 function validateInput(input){
